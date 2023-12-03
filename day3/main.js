@@ -11,11 +11,13 @@ catch (err)
     throw new Error("Error reading the file.");
 }
 
+
+
 const numberOfLines = file.split("\n").length;
 let elements;
 let result = 0;
 
-for (let i = 0; i < numberOfLines; i++)
+for (let i = 1; i < numberOfLines - 1; i++)
 {
     elements = findNumbersPositionAndLengths(getLineFromFile(file, i));
 
@@ -58,24 +60,29 @@ function checkSurroundings(data, line, index, numberLength)
     let loopIndex = index - 1;
     let loopCondition = index + numberLength;
 
-    if (loopIndex < 0)
-    {
-        loopIndex = 0;
-    }
+    // if (loopIndex < 0)
+    // {
+    //     loopIndex = 0;
+    // }
 
-    if (loopCondition = currentLine.length)
-    {
-        loopCondition = currentLine.length - 1;
-    }
+    // if (loopCondition = currentLine.length)
+    // {
+    //     loopCondition = currentLine.length - 1;
+    // }
 
     // check symbol before and after
     currentLine = getLineFromFile(data, line);
     
-    if  ((currentLine[index - 1] != '.' && index - 1 >= 0) ||
-         (currentLine[index + numberLength] != '.' && index + numberLength < currentLine.length))
+    if (currentLine[index - 1] != '.' || currentLine[index + numberLength] != '.')
     {
         return true;
     }
+
+    // if  ((currentLine[index - 1] != '.' && index - 1 >= 0) ||
+    //      (currentLine[index + numberLength] != '.' && index + numberLength < currentLine.length))
+    // {
+    //     return true;
+    // }
 
     // if (currentLine[(index - 1 < 0 ? 0 : index - 1)] != '.' ||
     //     currentLine[(index + numberLength == currentLine.length ? index + numberLength - 1 : index + numberLength)] != '.')
@@ -116,11 +123,6 @@ function checkSurroundings(data, line, index, numberLength)
 function getLineFromFile(data, line)
 {
     const fileArray = data.split('\n');
-
-    if (line < 0 || line >= fileArray.length)
-    {
-        return null;
-    }
 
     return fileArray[line];
 }
