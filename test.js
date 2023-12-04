@@ -1,2 +1,2 @@
-const str = 'hello';
-console.log(str[-1]);
+const regex = /\d+\*/;
+console.log("..87*9..".match(regex));
